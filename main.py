@@ -15,11 +15,12 @@ for country in country_all:
     #print("country name:" ,country_name, "country capital:",country_capital, "country population:",country_population, "country area:",country_area)
     lists.append(list)
 try:
-    with open('country_data.csv', 'w') as csvfile:
+    with open('country_data.csv', 'w',encoding='utf-8') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=['country_name','country_capital','country_population','country_area'])
         writer.writeheader()
         for list in lists:
             writer.writerow(list)
+        csvfile.close()
 except IOError:
     print("I/O error")
 
