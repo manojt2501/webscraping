@@ -32,7 +32,6 @@ try:
         f= open("scrap.sql","a", encoding="UTF-8")
         f.write(sql + '\n')
     f.close()
-
 except IOError:
     print("I/O error")
 
