@@ -12,10 +12,9 @@ for country in country_all:
     list['country_capital']=country.find('span',attrs={"class":"country-capital"}).text
     list['country_population']=country.find('span',attrs={"class":"country-population"}).text
     list['country_area']=country.find('span',attrs={"class":"country-area"}).text
-    #print("country name:" ,country_name, "country capital:",country_capital, "country population:",country_population, "country area:",country_area)
     lists.append(list)
 try:
-    with open('country_data.csv', 'w',encoding='utf-8') as csvfile:
+    with open('country_data.csv', 'w',encoding='utf-8') as csvfile: #used UTF-8 encoding as my scraped data was containing unicode characters
         writer = csv.DictWriter(csvfile, fieldnames=['country_name','country_capital','country_population','country_area'])
         writer.writeheader()
         for list in lists:
@@ -25,8 +24,8 @@ except IOError:
     print("I/O error")
 try:
     for mylist in lists:
-        columns = ', '.join("" + x + "" for x in mylist.keys())
-        values = ', '.join("'" + x + "'" for x in mylist.values())
+        columns = ', '.join("" + str(x) + "" for x in mylist.keys())
+        values = ', '.join("'" + str(x) + "'" for x in mylist.values())
         sql = "INSERT INTO %s ( %s ) VALUES ( %s );" % ('mytable', columns, values)
         print(sql)
         f= open("scrap.sql","a", encoding="UTF-8")
