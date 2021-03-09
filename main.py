@@ -23,7 +23,16 @@ try:
         csvfile.close()
 except IOError:
     print("I/O error")
+try:
+    for mylist in lists:
+        columns = ', '.join("" + x + "" for x in mylist.keys())
+        values = ', '.join("'" + x + "'" for x in mylist.values())
+        sql = "INSERT INTO %s ( %s ) VALUES ( %s );" % ('mytable', columns, values)
+        print(sql)
+        f= open("scrap.sql","a", encoding="UTF-8")
+        f.write(sql + '\n')
+    f.close()
 
-
-
+except IOError:
+    print("I/O error")
 
